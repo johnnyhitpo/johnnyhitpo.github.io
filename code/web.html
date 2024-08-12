@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>人口密度視覺化</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="title">臺灣人口指標視覺化</div>
+        <div class="controls">
+            <input type="radio" name="mode" value="city" id="city" checked><span>顯示縣市</span>
+            <input type="radio" name="mode" value="district" id="district"><span>顯示區域</span>
+            <input type="radio" name="mode" value="village" id="village"><span>顯示村里</span>
+        </div>
+    </div>
+    <div class="map-container">
+        <div id="loading" class="loading">資料載入中 請稍後...</div>
+        <div id="map"></div>
+        <div id="info">點擊地圖上的區域以查看詳細資料</div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #33425b;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #33425b;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    flex: 1;
+    display: flex;
+    height: calc(100% - 120px);
+    background-color: #484cb0;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    position: relative; /* 讓map-container成為定位的參考點 */
+}
+
+#map {
+    flex: 4;
+    height: 100%;
+    background-color: #484cb0;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #909cc7;
+    border: 1px solid #837d7d;
+    border-radius: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    height: 695px;
+    width: 400px;
+}
+
+#title {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.controls {
+    display: inline-block;
+    margin-bottom: 5px;
+    background-color: #484cb0;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controls input[type="radio"] {
+    margin: 0 5px;
+}
+
+.controls span {
+    margin-right: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.leaflet-popup-content-wrapper {
+    background: #87a8d7;
+    color: #ffffff; /* 控制彈出視窗文字的顏色 */
+    font-size: 14px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-content {
+    padding: 5px;
+}
+
+.leaflet-control-custom {
+    background-color: #a9d7f6;
+    padding: 5px;
+    margin: 2px;
+    cursor: pointer;
+    width: auto;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.leaflet-control-custom a {
+    background-color: #74afdf;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000000;
+}
+
+.legend {
+    background-color: #a9d7f6;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    line-height: 1.5;
+    color: #333;
+}
+
+.legend i {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    transform: translate(-50%, -50%); /* 將方塊移至正中央 */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    z-index: 1000;
+}
