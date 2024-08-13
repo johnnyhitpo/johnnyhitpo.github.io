@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     // 初始化地圖並設置預設視圖
-    const map = L.map('map').setView([23.5, 121], 8);
+    const map = L.map('map', {
+        easeLinearity: 0.5,
+    }).setView([23.5, 121], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 25,
     }).addTo(map);
@@ -188,85 +190,130 @@ document.addEventListener("DOMContentLoaded", function() {
                 // 當區域被點擊時顯示詳細資訊
                 layer.on('click', function () {
                     const infoDiv = document.getElementById('info');
-                    let details = `<h2>${feature.properties.縣市名稱}`;
-                
-                    if (feature.properties.鄉鎮市區名稱) details += ` ${feature.properties.鄉鎮市區名稱}`;             
-                    if (feature.properties.村里名稱) details += ` ${feature.properties.村里名稱}`;
-                    details += `</h2>`;
-
-                    details += `<table style="width: 100%; border-collapse: collapse; border-color: black;">`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>人口密度</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.人口密度.toFixed(2)} 人/km²</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>戶量</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.戶量.toFixed(2)} 人/戶</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>男女比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.性比例.toFixed(2)} : 100</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶養比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶養比.toFixed(2)} %</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶幼比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶幼比.toFixed(2)} %</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶老比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶老比.toFixed(2)} %</td></tr>`;
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>老化指數</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.老化指數.toFixed(2)} %</td></tr>`;
-                    let dataTime = feature.properties.資料時間.toString();
-                    let dataYear = dataTime.slice(0, 3);  
-                    let dataMonth = dataTime.slice(4, 6); 
-                    details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>資料時間</strong></td><td style="padding: 8px; border: 1px solid black;">${dataYear}年 ${dataMonth}月</td></tr>`;
-                    details += `</table><br>`;
-
-                    const uniqueKey = `${feature.properties.縣市名稱}-${feature.properties.鄉鎮市區名稱}-${feature.properties.村里名稱}`;
-                    const dataValues = [];
-                    const labels = [];
-
-                    // 根據年份查找對應的資料並繪製圖表
-                    years.forEach(year => {
-                        const features = geoJsonDataByYear[year][isShowingAll ? `${currentMode}_all` : currentMode].features;
-                        const matchedFeature = features.find(f => {
-                            return `${f.properties.縣市名稱}-${f.properties.鄉鎮市區名稱}-${f.properties.村里名稱}` === uniqueKey;
+                    
+                    setTimeout(() => {
+                        let details = `<h1 id="infoTitle">${feature.properties.縣市名稱}`;
+                        
+                        if (feature.properties.鄉鎮市區名稱) details += ` ${feature.properties.鄉鎮市區名稱}`;             
+                        if (feature.properties.村里名稱) details += ` ${feature.properties.村里名稱}`;
+                        details += `</h1>`;
+                    
+                        details += `<table id="infoTable" style="width: 100%; border-collapse: collapse; border-color: black;">`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>人口密度</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.人口密度.toFixed(2)} 人/km²</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>戶量</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.戶量.toFixed(2)} 人/戶</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>男女比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.性比例.toFixed(2)} : 100</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶養比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶養比.toFixed(2)} %</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶幼比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶幼比.toFixed(2)} %</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>扶老比</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.扶老比.toFixed(2)} %</td></tr>`;
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>老化指數</strong></td><td style="padding: 8px; border: 1px solid black;">${feature.properties.老化指數.toFixed(2)} %</td></tr>`;
+                        let dataTime = feature.properties.資料時間.toString();
+                        let dataYear = dataTime.slice(0, 3);  
+                        let dataMonth = dataTime.slice(4, 6); 
+                        details += `<tr><td style="padding: 8px; border: 1px solid black;"><strong>資料時間</strong></td><td style="padding: 8px; border: 1px solid black;">${dataYear}年 ${dataMonth}月</td></tr>`;
+                        details += `</table><br>`;
+                    
+                        const uniqueKey = `${feature.properties.縣市名稱}-${feature.properties.鄉鎮市區名稱}-${feature.properties.村里名稱}`;
+                        const dataValues = [];
+                        const labels = [];
+                    
+                        // 根據年份查找對應的資料並繪製圖表
+                        years.forEach(year => {
+                            const features = geoJsonDataByYear[year][isShowingAll ? `${currentMode}_all` : currentMode].features;
+                            const matchedFeature = features.find(f => {
+                                return `${f.properties.縣市名稱}-${f.properties.鄉鎮市區名稱}-${f.properties.村里名稱}` === uniqueKey;
+                            });
+                    
+                            labels.push(`${year}年`);
+                            dataValues.push(matchedFeature ? getPropertyValue(matchedFeature) : null);
                         });
+                    
+                        details += `<canvas id="dataChart" width="400" height="200"></canvas>`;
+                        details += `<br><strong>資料來源</strong>`;
+                        details += `<a href="https://segis.moi.gov.tw/STATCloud/QueryInterfaceView?COL=vKGgwWyRXs%252b7bKMVz25R9w%253d%253d&MCOL=iCz3tvkZIN5LRvBQN%252fB7gQ%253d%253d" target="_blank"><strong>社會經濟資料服務平台</strong></a>`;
+                        infoDiv.innerHTML = details;
+                    
+                        // 逐步顯示標題、表格和圖表
+                        setTimeout(() => {
+                            document.getElementById('infoTitle').style.opacity = 1;
+                        }, 150);
+                    
+                        setTimeout(() => {
+                            document.getElementById('infoTable').style.opacity = 1;
+                        }, 400);
+                    
+                        setTimeout(() => {
+                            const ctx = document.getElementById('dataChart').getContext('2d');
+                            const chartLabel = {
+                                'density': '人口密度 (人/km²)',
+                                'household': '戶量 (人/戶)',
+                                'gender': '男女比',
+                                'feed': '扶養比 (%)',
+                                'younger': '扶幼比 (%)',
+                                'elder': '扶老比 (%)',
+                                'aging': '老化指數 (%)'
+                            }[currentData];
+                    
+                            const chart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: chartLabel,
+                                        data: [], // 動態的資料數值
+                                        borderColor: '#000',
+                                        pointBackgroundColor: '#000',  
+                                        pointBorderColor: '#000',      
+                                        pointRadius: 5,                  
+                                        fill: false,
+                                        lineTension: 0.1,
+                                        borderWidth: 2 
+                                    }]
+                                },
+                                options: { 
+                                    scales: { 
+                                        y: { 
+                                            ticks: { 
+                                                color: '#000',
+                                                font: {
+                                                    family: 'CustomFont',  
+                                                },
+                                            } 
+                                        }, 
+                                        x: { 
+                                            ticks: { 
+                                                color: '#000',
+                                                font: {
+                                                    family: 'CustomFont',  
+                                                },
+                                            } 
+                                        } 
+                                    }, 
+                                    plugins: { 
+                                        legend: { 
+                                            labels: { 
+                                                color: '#000',
+                                                font: {
+                                                    family: 'CustomFont',  
+                                                },
+                                            } 
+                                        }
+                                    }
+                                }
+                            });
 
-                        labels.push(`${year}年`);
-                        dataValues.push(matchedFeature ? getPropertyValue(matchedFeature) : null);
-                    });
+                            // 逐步顯示點
+                            dataValues.forEach((value, index) => {
+                                setTimeout(() => {
+                                    chart.data.datasets[0].data.push(value);
+                                    chart.update();
+                                }, index * 100); // 每個點之間的延遲時間（100毫秒）
+                            });
 
-                    details += `<canvas id="dataChart" width="400" height="200"></canvas>`;
-                    details += `<br><strong>資料來源</strong>`;
-                    details += `<a href="https://segis.moi.gov.tw/STATCloud/QueryInterfaceView?COL=vKGgwWyRXs%252b7bKMVz25R9w%253d%253d&MCOL=iCz3tvkZIN5LRvBQN%252fB7gQ%253d%253d" target="_blank"><strong>社會經濟資料服務平台</strong></a>`;
-                    infoDiv.innerHTML = details;
-
-                    // 動態生成並顯示圖表
-                    const ctx = document.getElementById('dataChart').getContext('2d');
-                    const chartLabel = {
-                        'density': '人口密度 (人/km²)',
-                        'household': '戶量 (人/戶)',
-                        'gender': '男女比',
-                        'feed': '扶養比 (%)',
-                        'younger': '扶幼比 (%)',
-                        'elder': '扶老比 (%)',
-                        'aging': '老化指數 (%)'
-                    }[currentData];
-
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: chartLabel,
-                                data: dataValues, // 動態的資料數值
-                                borderColor: '#000',
-                                pointBackgroundColor: '#000',  
-                                pointBorderColor: '#000',      
-                                pointRadius: 5,                  
-                                fill: false,
-                                lineTension: 0.1,
-                                borderWidth: 2 
-                            }]
-                        },
-                        options: { 
-                            scales: { 
-                                y: { ticks: { color: '#000' } }, 
-                                x: { ticks: { color: '#000' } } 
-                            }, 
-                            plugins: { 
-                                legend: { labels: { color: '#000' } } 
-                            } 
-                        }
-                    });
-                });
+                            document.getElementById('dataChart').style.opacity = 1;
+                        }, 700);
+                    
+                    }, 100);
+                }); 
             }
         }).addTo(map);
     };

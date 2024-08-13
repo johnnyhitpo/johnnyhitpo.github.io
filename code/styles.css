@@ -1,17 +1,23 @@
+@font-face {
+    font-family: 'CustomFont'; /* 自訂字體名稱 */
+    src: url('../fonts/fenyuan.ttf') format('truetype'); /* 路徑和格式 */
+    font-weight: normal; /* 設定字體的粗細 */
+    font-style: normal; /* 設定字體的樣式 */
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #33425b;
+    font-family: 'CustomFont', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #786364;
 }
 /* 標籤樣式 */
 span {
     font-weight: bold;
     color: #333;
-    margin-right: 10px;
 }
 /* 下拉清單樣式 */
 select {
@@ -23,6 +29,7 @@ select {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 200px;
 }
 
 select:hover {
@@ -30,6 +37,15 @@ select:hover {
     border-color: #34c687;
 }
 
+/* 當選單被點擊時增加一個陰影效果 */
+select:focus {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 選單展開時的彈跳效果 */
+select:active {
+    transform: scale(0.95);
+}
 /* 使選項更加明顯 */
 select option {
     padding: 10px;
@@ -39,14 +55,15 @@ select option {
 
 /* 為選取的項目設置不同的顏色 */
 select option:checked {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #A79192;
+    color: #F6E9E2;
 }
+
 .container {
     text-align: center;
     padding: 20px;
-    background-color: #33425b;
-    color: #ffffff;
+    background-color: #786364;
+    color: #F6E9E2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -54,16 +71,17 @@ select option:checked {
     flex: 1;
     display: flex;
     height: 80%;
-    background-color: #484cb0;
+    background-color: #D2AEAD;
     margin-left: 15px;
     margin-right: 15px;
     position: relative; /* 讓map-container成為定位的參考點 */
+    padding-bottom: 3px;
 }
 
 #map {
     flex: 4;
-    height: 100%;
-    background-color: #484cb0;
+    height: 99%;
+    background-color: #D2AEAD;
 }
 
 #info {
@@ -72,8 +90,8 @@ select option:checked {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 10px;
-    background-color: #909cc7;
+    padding: 3px 10px 15px 10px;
+    background-color: #CFC5C9;
     border: 1px solid #837d7d;
     border-radius: 10px;
     margin: 10px;
@@ -81,6 +99,13 @@ select option:checked {
     height: 650px;
     width: 400px;
 }
+
+#info h2,
+#info table,
+#info canvas {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}   
 
 #title {
     font-size: 28px;
@@ -90,7 +115,7 @@ select option:checked {
 .controls {
     display: inline-block;
     margin-bottom: 10px;
-    background-color: #484cb0;
+    background-color: #A79192;
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -103,7 +128,7 @@ select option:checked {
 .controls span {
     margin-right: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: #000000;
 }
 
 .dataType {
@@ -121,7 +146,9 @@ select option:checked {
 .leaflet-popup-content {
     padding: 5px;
 }
-
+.leaflet-interactive {
+    transition: fill 0.5s ease, stroke 0.5s ease;
+}
 .leaflet-control-custom {
     background-color: #a9d7f6;
     padding: 5px;
@@ -176,4 +203,8 @@ select option:checked {
     font-weight: bold;
     color: #333;
     z-index: 1000;
+}
+
+body, html, h2, table, span, select, option, .controls, .leaflet-popup-content-wrapper, .leaflet-control-custom a, .legend, .loading {
+    font-family: 'CustomFont', Tahoma, Geneva, Verdana, sans-serif;
 }
