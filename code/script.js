@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         // 逐步顯示標題、表格和圖表
                         setTimeout(() => {
                             document.getElementById('infoTitle').style.opacity = 1;
-                        }, 150);
+                        }, 100);
                     
                         setTimeout(() => {
                             document.getElementById('infoTable').style.opacity = 1;

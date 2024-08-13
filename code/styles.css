@@ -117,8 +117,9 @@ select option:checked {
     margin-bottom: 10px;
     background-color: #A79192;
     padding: 8px;
-    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 .controls input[type="select"] {
@@ -129,6 +130,25 @@ select option:checked {
     margin-right: 20px;
     font-weight: bold;
     color: #000000;
+}
+
+.author{
+    background-color: #A79192;
+    position: absolute;
+    top: 80px;
+    right: 30px; 
+    background-color: #A79192; 
+    padding: 5px 10px 10px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#github{
+    background-color: #A79192;
+    width: 30px; 
+    height: 30px;
+    margin-left: 5px; 
+    vertical-align: middle;
 }
 
 .dataType {
