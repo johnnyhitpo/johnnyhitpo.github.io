@@ -7,7 +7,41 @@ body, html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #33425b;
 }
+/* 標籤樣式 */
+span {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+/* 下拉清單樣式 */
+select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
 
+select:hover {
+    background-color: #e6e6e6;
+    border-color: #34c687;
+}
+
+/* 使選項更加明顯 */
+select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* 為選取的項目設置不同的顏色 */
+select option:checked {
+    background-color: #4CAF50;
+    color: white;
+}
 .container {
     text-align: center;
     padding: 20px;
@@ -19,10 +53,10 @@ body, html {
 .map-container {
     flex: 1;
     display: flex;
-    height: calc(100% - 120px);
+    height: 80%;
     background-color: #484cb0;
-    margin-bottom: 15px;
     margin-left: 15px;
+    margin-right: 15px;
     position: relative; /* 讓map-container成為定位的參考點 */
 }
 
@@ -44,26 +78,25 @@ body, html {
     border-radius: 10px;
     margin: 10px;
     margin-top: 20px;
-    height: 695px;
+    height: 650px;
     width: 400px;
 }
 
 #title {
-    margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
 }
 
 .controls {
     display: inline-block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     background-color: #484cb0;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.controls input[type="radio"] {
+.controls input[type="select"] {
     margin: 0 5px;
 }
 
@@ -71,6 +104,10 @@ body, html {
     margin-right: 20px;
     font-weight: bold;
     color: #ffffff;
+}
+
+.dataType {
+    margin-left: 20px;
 }
 
 .leaflet-popup-content-wrapper {

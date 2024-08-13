@@ -8,11 +8,24 @@
 </head>
 <body>
     <div class="container">
-        <div id="title">臺灣人口指標視覺化</div>
+        <div id="title"><h3>臺灣人口指標視覺化</h3></div>
         <div class="controls">
-            <input type="radio" name="mode" value="city" id="city" checked><span>顯示縣市</span>
-            <input type="radio" name="mode" value="district" id="district"><span>顯示區域</span>
-            <input type="radio" name="mode" value="village" id="village"><span>顯示村里</span>
+            <span>選取範圍</span>
+            <select id="modeSelect">
+                <option value="city" selected>顯示縣市</option>
+                <option value="district">顯示區域</option>
+                <option value="village">顯示村里</option>
+            </select>
+            <span class="dataType">選取資料</span>
+            <select id="dataSelect">
+                <option value="density" selected>人口密度</option>
+                <option value="household">戶量</option>
+                <option value="gender">男女比</option>
+                <option value="feed">扶養比</option>
+                <option value="younger">扶幼比</option>
+                <option value="elder">扶老比</option>
+                <option value="aging">老化指數</option>
+            </select>        
         </div>
     </div>
     <div class="map-container">
