@@ -14,19 +14,19 @@ body, html {
     font-family: 'CustomFont', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #786364;
 }
-/* 標籤樣式 */
-span {
-    font-weight: bold;
-    color: #333;
+
+select, option, .controls, .leaflet-popup-content-wrapper, .leaflet-control-custom a, .legend, .loading {
+    font-family: 'CustomFont', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* 下拉清單樣式 */
 select {
-    padding: 8px;
+    padding: 6px;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     color: #333;
-    font-size: 14px;
+    font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     width: 200px;
@@ -37,31 +37,50 @@ select:hover {
     border-color: #34c687;
 }
 
-/* 當選單被點擊時增加一個陰影效果 */
 select:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 選單展開時的彈跳效果 */
 select:active {
     transform: scale(0.95);
 }
-/* 使選項更加明顯 */
+
 select option {
     padding: 10px;
     background-color: #fff;
     color: #333;
+    font-size: 18px; /* 調整選項的字體大小 */
 }
 
-/* 為選取的項目設置不同的顏色 */
 select option:checked {
     background-color: #A79192;
     color: #F6E9E2;
 }
+/* 調整下拉選單和文字的字體大小 */
+#modeSelect,
+#dataSelect {
+    font-size: 18px; /* 你可以根據需要調整字體大小 */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 200px;
+}
+
+.rangeType,
+.dataType {
+    font-size: 18px; /* 這裡也可以調整字體大小 */
+    margin-left: 20px;
+    font-weight: bold;
+    color: #333;
+}
 
 .container {
     text-align: center;
-    padding: 20px;
+    padding: 5px;
     background-color: #786364;
     color: #F6E9E2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -72,15 +91,14 @@ select option:checked {
     display: flex;
     height: 80%;
     background-color: #D2AEAD;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 0 50px;
     position: relative; /* 讓map-container成為定位的參考點 */
-    padding-bottom: 3px;
+    border-radius: 10px;
 }
 
 #map {
     flex: 4;
-    height: 99%;
+    height: 100%;
     background-color: #D2AEAD;
 }
 
@@ -90,7 +108,7 @@ select option:checked {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 3px 10px 15px 10px;
+    padding: 0px 10px 20px 10px;
     background-color: #CFC5C9;
     border: 1px solid #837d7d;
     border-radius: 10px;
@@ -100,12 +118,10 @@ select option:checked {
     width: 400px;
 }
 
-#info h2,
-#info table,
-#info canvas {
+#info h2, #info table, #info canvas {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-}   
+}
 
 #title {
     font-size: 28px;
@@ -132,22 +148,25 @@ select option:checked {
     color: #000000;
 }
 
-.author{
+.author {
     background-color: #A79192;
     position: absolute;
     top: 80px;
-    right: 30px; 
-    background-color: #A79192; 
-    padding: 5px 10px 10px 10px;
-    border-radius: 5px;
+    right: 50px; 
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    height: 80px;
+    text-align: center;
+    line-height: 0.6;
 }
 
-#github{
+#github {
     background-color: #A79192;
-    width: 30px; 
-    height: 30px;
-    margin-left: 5px; 
+    width: 25px; 
+    height: 25px;
+    margin-left: 3px; 
     vertical-align: middle;
 }
 
@@ -166,9 +185,11 @@ select option:checked {
 .leaflet-popup-content {
     padding: 5px;
 }
+
 .leaflet-interactive {
     transition: fill 0.5s ease, stroke 0.5s ease;
 }
+
 .leaflet-control-custom {
     background-color: #a9d7f6;
     padding: 5px;
@@ -184,9 +205,6 @@ select option:checked {
     padding: 10px 15px;
     margin: 5px 0;
     cursor: pointer;
-    width: auto;
-    height: auto;
-    line-height: normal;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -215,7 +233,7 @@ select option:checked {
     top: 50%;
     left: 37%;
     transform: translate(-50%, -50%); /* 將方塊移至正中央 */
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -223,8 +241,4 @@ select option:checked {
     font-weight: bold;
     color: #333;
     z-index: 1000;
-}
-
-body, html, h2, table, span, select, option, .controls, .leaflet-popup-content-wrapper, .leaflet-control-custom a, .legend, .loading {
-    font-family: 'CustomFont', Tahoma, Geneva, Verdana, sans-serif;
 }
