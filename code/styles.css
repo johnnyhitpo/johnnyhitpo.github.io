@@ -142,7 +142,6 @@ select option:checked {
     padding: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    font-size: 18px;
 }
 
 .controls input[type="select"] {
@@ -153,6 +152,8 @@ select option:checked {
     margin-right: 20px;
     font-weight: bold;
     color: #000000;
+    font-size: 20px;
+
 }
 
 .author {
@@ -170,7 +171,7 @@ select option:checked {
 }
 
 #github {
-    background-color: #A79192;
+    background-color: #CFC5C9;
     width: 25px; 
     height: 25px;
     margin-left: 3px; 
