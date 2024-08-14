@@ -9,16 +9,16 @@
 </head>
 <body>
     <div class="author">
-        <h4>Made by 梁哲嘉</h4>
+        <h3>Made by 梁哲嘉</h3>
         <div style="white-space: nowrap;">
-            <h4 style="display: inline;">@johnnyhitpo</h4>
+            <h3 style="display: inline;">@johnnyhitpo</h3>
             <img src="../data/github.png" id="github" alt="GitHub Logo">
         </div>
     </div>
     <div class="container">
         <div id="title"><h2>臺灣人口指標視覺化</h2></div>
         <div class="controls">
-            <span>選取範圍</span>
+            <span id="rangeType">選取範圍</span>
             <select id="modeSelect">
                 <option value="city" selected>顯示縣市</option>
                 <option value="district">顯示區域</option>
@@ -39,7 +39,7 @@
     <div class="map-container">
         <div id="loading" class="loading">資料載入中 請稍後...</div>
         <div id="map"></div>
-        <div id="info">點擊地圖上的區域以查看詳細資料</div>
+        <div id="info"><h3><strong>點擊地圖上的區域以查看詳細資料</strong></h3></div>
     </div>
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
