@@ -184,12 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // 當滑鼠移出區域時重置樣式
                 layer.on('mouseout', function (e) {
                     currentGeoJsonLayer.resetStyle(e.target);
-                    e.target.closePopup();
-
-                    const popup = e.target.getPopup();
-                    if (popup && popup._contentNode) {
-                        popup._contentNode.innerHTML = ''; // 清空内容
-                    }
+                    e.target.closePopup(); 
                 });
                 
                 // 當區域被點擊時顯示詳細資訊
